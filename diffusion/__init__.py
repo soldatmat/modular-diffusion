@@ -54,7 +54,7 @@ class Model(Generic[D]):
         self.net.train()
         batch = Batch[D](self.device) # type: ignore[union-attr]
         for _ in range(epochs):
-            bar = tqdm(self.data, disable=not progress)
+            bar = tqdm(self.data, disable=not progress, desc=f"Epoch {_ + 1}/{epochs}")
             for batch.w, batch.y in self.data:
                 if isinstance(self.guidance, guidance.ClassifierFree):
                     i = torch.randperm(batch.y.shape[0])
